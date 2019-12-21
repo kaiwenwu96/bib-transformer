@@ -1,6 +1,6 @@
 # bib transformer (under construction)
 
-Citing a conference paper
+Cite a conference paper
 ```
 @inproceedings{TramerBoneh2019,
     title={\href{http://papers.nips.cc/paper/8821-adversarial-training-and-robustness-for-multiple-perturbations.pdf}{Adversarial Training and Robustness for Multiple Perturbations}},
@@ -11,7 +11,7 @@ Citing a conference paper
 }
 ```
 
-Citing a journal paper
+Cite a journal paper
 ```
 @article{Dykstra1983,
   title={An algorithm for restricted least squares regression},
@@ -24,7 +24,7 @@ Citing a journal paper
 }
 ```
 
-Citing an openreview preprint
+Cite an openreview preprint
 ```
 @preprint{Anonymous2020,
   title={\href{https://openreview.net/forum?id=Skgq1ANFDB}{Curvature-based Robustness Certificates against Adversarial Examples}},
@@ -34,7 +34,7 @@ Citing an openreview preprint
 }
 ```
 
-Citing an arXiv preprint
+Cite an arXiv preprint
 ```
 @preprint{Manole2019,
   title={Minimax Confidence Intervals for the Sliced Wasserstein Distance},
@@ -44,7 +44,7 @@ Citing an arXiv preprint
 }
 ```
 
-Citing a book
+Cite a book
 ```
 @book{BoydVandenberghe2004,
   title={Convex optimization},
@@ -54,3 +54,5 @@ Citing a book
   year={2004},
 }
 ```
+
+All fields above are mandatory.
