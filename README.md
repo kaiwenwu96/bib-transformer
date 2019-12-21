@@ -24,7 +24,7 @@ Cite a journal paper
 }
 ```
 
-Cite an openreview preprint
+Cite a preprint
 ```
 @preprint{Anonymous2020,
   title={\href{https://openreview.net/forum?id=Skgq1ANFDB}{Curvature-based Robustness Certificates against Adversarial Examples}},
@@ -32,10 +32,7 @@ Cite an openreview preprint
   note={Submitted to International Conference on Learning Representations},
   year={2020},
 }
-```
 
-Cite an arXiv preprint
-```
 @preprint{Manole2019,
   title={Minimax Confidence Intervals for the Sliced Wasserstein Distance},
   author={Manole, Tudor and Balakrishnan, Sivaraman and Wasserman, Larry},
