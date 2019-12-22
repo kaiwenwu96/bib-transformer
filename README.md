@@ -3,7 +3,7 @@
 Cite a conference paper
 ```
 @inproceedings{TramerBoneh2019,
-  title     = {\href{http://papers.nips.cc/paper/8821-adversarial-training-and-robustness-for-multiple-perturbations.pdf}{Adversarial Training and Robustness for Multiple Perturbations}},
+  title     = {\href{http://papers.nips.cc/paper/8821-adversarial-training-and-robustness-for-multiple-perturbations.html}{Adversarial Training and Robustness for Multiple Perturbations}},
   author    = {Tramer, Florian and Boneh, Dan},
   booktitle = {Advances in Neural Information Processing Systems 32},
   pages     = {5858--5868},
