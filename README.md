@@ -1,7 +1,7 @@
 # bib transformer (under construction)
 
 ## Usage
-Type `python transform.py test.bib` in the command line. The procedure will parse the bib file and output new bib entries in the command line. Redirect the output to a file if you want to (e.g. python transform.py test.bib > new-test.bib).
+Type `python transform.py test.bib` in the command line. The procedure will parse the bib file and output new bib entries in the command line. Redirect the output to a file if you want to (e.g. `python transform.py test.bib > new-test.bib`).
 
 The procedure will crash on bib files with incorrect grammar or missing required fields (e.g. author, title).
 
@@ -14,12 +14,12 @@ The procedure will crash on bib files with incorrect grammar or missing required
 
 Cite a conference paper
 ```
-@inproceedings{TramerBoneh2019,
-  title     = {\href{http://papers.nips.cc/paper/8821-adversarial-training-and-robustness-for-multiple-perturbations.html}{Adversarial Training and Robustness for Multiple Perturbations}},
-  author    = {Tramer, Florian and Boneh, Dan},
-  booktitle = {Advances in Neural Information Processing Systems 32},
-  pages     = {5858--5868},
-  year      = {2019},
+@inproceedings{DuchiSSC2008,
+  title     = {Efficient Projections onto the $\ell_1$-ball for Learning in High Dimensions},
+  author    = {Duchi, John and Shalev-Shwartz, Shai and Singer, Yoram and Chandra, Tushar},
+  booktitle = {Proceedings of the 25th international conference on Machine learning},
+  pages     = {272--279},
+  year      = {2008},
 }
 ```
 
