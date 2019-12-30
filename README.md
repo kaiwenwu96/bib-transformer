@@ -53,3 +53,56 @@ Cite a book
 ```
 
 All fields above are mandatory.
+
+We have the following convention for bib entry id name
+```
+[author(s) last name(s)] + [year]
+```
+
+Only one author (first author's last name + year)
+```
+@inproceedings{Yu13,
+    title={On Decomposing the Proximal Map},
+    author={Yaoliang Yu},
+    booktitle={Advances in Neural Information Processing Systems 27 {(NIPS)}},
+    year={2013},
+}
+```
+
+Two authors (first author's last name + second author's last name + year)
+```
+@inproceedings{SunYu19,
+  title={Least Squares Estimation of Weakly Convex Functions},
+  author={S. Sun and Y. Yu},
+  booktitle={International Conference on Artificial Intelligence and Statistics {(AISTATS)}},  
+  year={2019},
+}
+```
+
+At least three authors (first author's last name + the initial of remaining authors' last names + year)
+```
+@inproceedings{WangSY19,
+  title       = {Multivariate Triangular Quantile Maps for Novelty Detection},
+  author      = {J. Wang and S. Sun and Y. Yu},
+  booktitle   = {Advances in Neural Information Processing Systems {(NeurIPS)}},  
+  year        = {2019},
+  keywords    = {published},  
+}
+```
+
+If there is a conflict of id, append one additional character to distinguish them.
+```
+@inproceedings{Yu13a,
+    title     = {Better Approximation and Faster Algorithm Using the Proximal Average},
+    author    = {Yaoliang Yu},
+    booktitle = {Advances in Neural Information Processing Systems 27 {(NIPS)}},
+    year      = {2013},
+}
+
+@inproceedings{Yu13b,
+    title     = {On Decomposing the Proximal Map},
+    author    = {Yaoliang Yu},
+    booktitle = {Advances in Neural Information Processing Systems 27 {(NIPS)}},
+    year      = {2013},
+}
+```
