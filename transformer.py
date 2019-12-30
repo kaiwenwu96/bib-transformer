@@ -42,11 +42,11 @@ def insert_url(ent):
 def get_conference(ent):
     entry = ""
     entry += "@{}{{{},\n".format(ent.typ, ent.key)
-    entry += "  title={{{}}},\n".format(ent['title'])
-    entry += "  author={{{}}},\n".format(ent['author'])
-    entry += "  booktitle={{{}}},\n".format(ent['booktitle'])
-    entry += "  pages={{{}}},\n".format(ent['pages'])
-    entry += "  year={{{}}},\n".format(ent['year'])
+    entry += "  title     = {{{}}},\n".format(ent['title'])
+    entry += "  author    = {{{}}},\n".format(ent['author'])
+    entry += "  booktitle = {{{}}},\n".format(ent['booktitle'])
+    entry += "  pages     = {{{}}},\n".format(ent['pages'])
+    entry += "  year      = {{{}}},\n".format(ent['year'])
     entry += "}"
     return entry
 
@@ -54,13 +54,13 @@ def get_conference(ent):
 def get_journal(ent):
     entry = ""
     entry += "@{}{{{},\n".format(ent.typ, ent.key)
-    entry += "  title={{{}}},\n".format(ent['title'])
-    entry += "  author={{{}}},\n".format(ent['author'])
-    entry += "  journal={{{}}},\n".format(ent['journal'])
-    entry += "  volume={{{}}},\n".format(ent['volume'])
-    entry += "  number={{{}}},\n".format(ent['number'])
-    entry += "  pages={{{}}},\n".format(ent['pages'])
-    entry += "  year={{{}}},\n".format(ent['year'])
+    entry += "  title   = {{{}}},\n".format(ent['title'])
+    entry += "  author  = {{{}}},\n".format(ent['author'])
+    entry += "  journal = {{{}}},\n".format(ent['journal'])
+    entry += "  volume  = {{{}}},\n".format(ent['volume'])
+    entry += "  number  = {{{}}},\n".format(ent['number'])
+    entry += "  pages   = {{{}}},\n".format(ent['pages'])
+    entry += "  year    = {{{}}},\n".format(ent['year'])
     entry += "}"
     return entry
 
@@ -68,10 +68,10 @@ def get_journal(ent):
 def get_preprint(ent):
     entry = ""
     entry += "@{}{{{},\n".format(ent.typ, ent.key)
-    entry += "  title={{{}}},\n".format(ent['title'])
-    entry += "  author={{{}}},\n".format(ent['author'])
-    entry += "  note={{{}}},\n".format(ent['note'])
-    entry += "  year={{{}}},\n".format(ent['year'])
+    entry += "  title  = {{{}}},\n".format(ent['title'])
+    entry += "  author = {{{}}},\n".format(ent['author'])
+    entry += "  note   = {{{}}},\n".format(ent['note'])
+    entry += "  year   = {{{}}},\n".format(ent['year'])
     entry += "}"
     return entry
 
@@ -79,11 +79,11 @@ def get_preprint(ent):
 def get_book(ent):
     entry = ""
     entry += "@{}{{{},\n".format(ent.typ, ent.key)
-    entry += "  title={{{}}},\n".format(ent['title'])
-    entry += "  author={{{}}},\n".format(ent['author'])
-    entry += "  publisher={{{}}},\n".format(ent['note'])
-    entry += "  edition={{{}}},\n".format(ent['edition'])
-    entry += "  year={{{}}},\n".format(ent['year'])
+    entry += "  title     = {{{}}},\n".format(ent['title'])
+    entry += "  author    = {{{}}},\n".format(ent['author'])
+    entry += "  publisher = {{{}}},\n".format(ent['note'])
+    entry += "  edition   = {{{}}},\n".format(ent['edition'])
+    entry += "  year      = {{{}}},\n".format(ent['year'])
     entry += "}"
     return entry
 
@@ -141,15 +141,12 @@ if __name__ == "__main__":
                     ent.key = ent.key[:-1]
                 new_id_lst.append(ent.key)
 
-        f = open("new-" + args.file, "w")
-
         for ent in ent_lst:
             ent = insert_url(ent)
             ent = change_id(ent)
             s = ent2str(ent)
 
-            f.write("{}\n\n".format(s))
-            print("{}\n\n".format(s))
+            print("{}\n".format(s))
 
         recoverer.reraise()
 

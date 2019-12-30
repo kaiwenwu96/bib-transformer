@@ -1,14 +1,16 @@
 # bib transformer (under construction)
 
-## functionality
+## Usage
+Type `python transform.py test.bib` in the command line. The procedure will parse the bib file and output new bib entries in the command line. Redirect the output to a file if you want to (e.g. python transform.py test.bib > new-test.bib).
 
+The procedure will crash on bib files with incorrect grammar or missing required fields (e.g. author, title).
+
+## Functionalities
 - [x] change 'url' field into a hyper link in title
 - [x] change id of bib entry 
 - [x] delete redundant fields (e.g. keywords)
-- [x] output the new bib entries in the command line (redirect the output to a file if you want to, e.g. `python transform.py test.bib > new-test.bib`)
 
-
-## general citation format
+## General Citation Format
 
 Cite a conference paper
 ```
@@ -64,7 +66,7 @@ Cite a book
 
 All fields above are mandatory.
 
-## naming convention
+## Naming Convention
 
 We have the following convention for bib entry id.
 ```
@@ -121,6 +123,6 @@ If there is a conflict of id, append one additional character to distinguish the
 }
 ```
 
-## additional remark
+## Additional Remarks
 
-We recommand that download bib entries from official websites (e.g. icml.cc and nips.cc, openreview.net) rather than google scholar.
+We recommand that download bib entries from official websites (e.g. proceedings.mlr.press and nips.cc, openreview.net) rather than google scholar.
