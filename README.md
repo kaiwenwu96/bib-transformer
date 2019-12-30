@@ -1,12 +1,12 @@
 # bib transformer (under construction)
 
 ## functionality
-```
+
 [x] change 'url' field into a hyper link in title
 [x] change id of bib entry 
 [x] delete redundant fields (e.g. keywords)
 [x] output the new bib entries in the command line (redirect the output to a file if you want to, e.g. `python transform.py test.bib > new-test.bib`)
-```
+
 
 ## general citation format
 
