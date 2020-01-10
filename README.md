@@ -125,4 +125,4 @@ If there is a conflict of id, append one additional character to distinguish the
 
 ## Additional Remarks
 
-We recommand that download bib entries from official websites (e.g. proceedings.mlr.press and nips.cc, openreview.net) rather than google scholar.
+We recommand downloading bib entries from official websites (e.g. proceedings.mlr.press, nips.cc and openreview.net) rather than google scholar.
