@@ -8,7 +8,8 @@ import argparse
 
 
 def get_id(ent):
-    authors = [biblib.algo.tex_to_unicode(author.pretty(), pos=ent.field_pos['author']) for author in ent.authors()]
+    # authors = [biblib.algo.tex_to_unicode(author.pretty(), pos=ent.field_pos['author']) for author in ent.authors()]
+    authors = [biblib.algo.tex_to_ascii(author.pretty(), pos=ent.field_pos['author']) for author in ent.authors()]
 
     ret = ""
 
@@ -88,7 +89,7 @@ def get_book(ent):
     return entry
 
 
-def ent2str(ent):
+def ent2bib(ent):
     if ent.typ in ['inproceedings', 'incollection', 'InProceedings']:
         ent.typ = 'inproceedings'
         s = get_conference(ent)
@@ -104,9 +105,35 @@ def ent2str(ent):
     return s
 
 
+def ent2latex(ent):
+    def get_venue(ent):
+        if ent.typ in ['inproceedings', 'incollection', 'InProceedings']:
+            return ent['booktitle']
+        elif ent.typ == 'article':
+            return ent['journal']
+        elif ent.typ == 'preprint':
+            return ent['note']
+        else:
+            raise Exception("cannot handle")
+
+    entry = ""
+    authors = [biblib.algo.tex_to_unicode(author.pretty(), pos=ent.field_pos['author']) for author in ent.authors()]
+    entry += ", ".join([author if author != "Kaiwen Wu" else "\\textbf{Kaiwen Wu}" for author in authors]) + " \\\\\n"
+    entry += ent['title'] + " \\\\\n"
+    entry += get_venue(ent) + ", "
+    entry += ent['year'] + " \\\\\n"
+
+    return entry
+
+
+def ent2html(ent):
+    pass
+
+
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument('file', help='.bib file to process', type=str)
+    arg_parser.add_argument('-o', help='options', type=str, default="bib")
 
     args = arg_parser.parse_args()
 
@@ -144,7 +171,13 @@ if __name__ == "__main__":
         for ent in ent_lst:
             ent = insert_url(ent)
             ent = change_id(ent)
-            s = ent2str(ent)
+
+            if args.o == "bib":
+                s = ent2bib(ent)
+            elif args.o == "latex":
+                s = ent2latex(ent)
+            elif args.o == "html":
+                s = ent2html(ent)
 
             print("{}\n".format(s))
 
