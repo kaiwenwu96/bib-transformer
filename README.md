@@ -18,11 +18,11 @@ Google scholar is always a default source when cannot find the official bib entr
 
 We recommend downloading bib entries from official websites. Here is a non-exhaustive list of websites.
 
-1. For ICML, AISTATS and COLT papers, see <https://proceedings.mlr.press>
+1. For ICML, AISTATS and COLT papers, see <http://proceedings.mlr.press>
 2. For NIPS papers, see <https://papers.nips.cc>
 3. For ICLR papers, see <https://openreview.net>
 4. For Annals of Statistics paper, see <https://projecteuclid.org/>
-5. For CVPR and ICCV papers, see <https://openaccess.thecvf.com> 
+5. For CVPR and ICCV papers, see <http://openaccess.thecvf.com> 
 
 ## General Citation Format
 
