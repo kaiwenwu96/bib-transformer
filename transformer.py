@@ -46,7 +46,8 @@ def get_conference(ent):
     entry += "  title     = {{{}}},\n".format(ent['title'])
     entry += "  author    = {{{}}},\n".format(ent['author'])
     entry += "  booktitle = {{{}}},\n".format(ent['booktitle'])
-    entry += "  pages     = {{{}}},\n".format(ent['pages'])
+    if 'pages' in ent:
+        entry += "  pages     = {{{}}},\n".format(ent['pages'])
     entry += "  year      = {{{}}},\n".format(ent['year'])
     entry += "}"
     return entry
@@ -95,7 +96,8 @@ def ent2bib(ent):
         s = get_conference(ent)
     elif ent.typ == 'article':
         s = get_journal(ent)
-    elif ent.typ == 'preprint':
+    elif ent.typ in ['preprint', 'unpublished']:
+        ent.typ = 'unpublished'
         s = get_preprint(ent)
     elif ent.typ == 'book':
         s = get_book(ent)
