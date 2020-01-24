@@ -14,17 +14,19 @@ The procedure will crash on bib files with incorrect grammar or missing required
 
 ## Source of Bib Entries 
 
-Google scholar is always a default source when cannot find official the bib entry. However, when possible, one should avoid using goodle scholar. When possible, please cite a published version rather than an arXiv preprint version.
+Google scholar is always a default source when cannot find the official bib entry. However, when the official bib file is available, one should avoid using Google scholar. When possible, please cite a published version rather than an arXiv preprint version.
 
 We recommend downloading bib entries from official websites. Here is a non-exhaustive list of websites.
 
-1. For ICML, AISTATS and COLT papers, see <proceedings.mlr.press>
-2. For NIPS papers, see <papers.nips.cc>
-3. For ICLR papers, see <openreview.net>
+1. For ICML, AISTATS and COLT papers, see <https://proceedings.mlr.press>
+2. For NIPS papers, see <https://papers.nips.cc>
+3. For ICLR papers, see <https://openreview.net>
 4. For Annals of Statistics paper, see <https://projecteuclid.org/>
-5. For CVPR and ICCV papers, see <openaccess.thecvf.com> 
+5. For CVPR and ICCV papers, see <https://openaccess.thecvf.com> 
 
 ## General Citation Format
+
+We list a few examples illustrate the required bib fields for different types of publications.
 
 Cite a conference paper
 ```
@@ -78,18 +80,16 @@ Cite a book
 }
 ```
 
-All fields above are mandatory.
-
-## Naming Convention
+## Bib Entry Id Convention 
 
 We have the following convention for bib entry id.
 ```
-[author(s) last name(s)] + [year]
+[author(s) last name(s)] + [year] + [possible additional suffix]
 ```
 
 Here are a few examples.
 
-Only one author (first author's last name + year)
+Case 1: Only one author (first author's last name + year)
 ```
 @inproceedings{Yu13,
     title={On Decomposing the Proximal Map},
@@ -99,7 +99,7 @@ Only one author (first author's last name + year)
 }
 ```
 
-Two authors (first author's last name + second author's last name + year)
+Case 2: Two authors (first author's last name + second author's last name + year)
 ```
 @inproceedings{SunYu19,
   title={Least Squares Estimation of Weakly Convex Functions},
@@ -109,7 +109,7 @@ Two authors (first author's last name + second author's last name + year)
 }
 ```
 
-At least three authors (first author's last name + the initial of remaining authors' last names + year)
+Case 3: At least three authors (first author's last name + the initial of remaining authors' last names + year)
 ```
 @inproceedings{WangSY19,
   title       = {Multivariate Triangular Quantile Maps for Novelty Detection},
@@ -120,7 +120,7 @@ At least three authors (first author's last name + the initial of remaining auth
 }
 ```
 
-If there is a conflict of id, append one additional character to distinguish them.
+Case 4: If there is a conflict of id, append one additional character to distinguish them.
 ```
 @inproceedings{Yu13a,
     title     = {Better Approximation and Faster Algorithm Using the Proximal Average},
