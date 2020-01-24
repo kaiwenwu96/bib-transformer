@@ -1,14 +1,28 @@
 # bib transformer (under construction)
 
+The purpose of the repository is to present rules and tips on bib entries and citation format when writing a paper. In addition to that, this repository also contains a simple procedure to pre-process bib entries (missing entries checking, reformatting bib entry fields, and unifying bib entries' id), which makes [this guy's](https://cs.uwaterloo.ca/~y328yu/) life easier.
+
 ## Usage
 Type `python transform.py test.bib` in the command line. The procedure will parse the bib file and output new bib entries in the command line. Redirect the output to a file if you want to (e.g. `python transform.py test.bib > new-test.bib`).
 
 The procedure will crash on bib files with incorrect grammar or missing required fields (e.g. author, title).
 
-## Functionalities
+## Core Functionalities
 - [x] change 'url' field into a hyper link in title
-- [x] change id of bib entry 
+- [x] unify bib entries id (see blow) 
 - [x] delete redundant fields (e.g. keywords)
+
+## Source of Bib Entries 
+
+Google scholar is always a default source when cannot find official the bib entry. However, when possible, one should avoid using goodle scholar. When possible, please cite a published version rather than an arXiv preprint version.
+
+We recommend downloading bib entries from official websites. Here is a non-exhaustive list of websites.
+
+1. For ICML, AISTATS and COLT papers, see <proceedings.mlr.press>
+2. For NIPS papers, see <papers.nips.cc>
+3. For ICLR papers, see <openreview.net>
+4. For Annals of Statistics paper, see <https://projecteuclid.org/>
+5. For CVPR and ICCV papers, see <openaccess.thecvf.com> 
 
 ## General Citation Format
 
@@ -122,7 +136,3 @@ If there is a conflict of id, append one additional character to distinguish the
     year      = {2013},
 }
 ```
-
-## Additional Remarks
-
-We recommand downloading bib entries from official websites (e.g. proceedings.mlr.press, nips.cc and openreview.net) rather than google scholar.
