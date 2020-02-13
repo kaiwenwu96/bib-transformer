@@ -60,7 +60,7 @@ def get_journal(ent):
     entry += "  author  = {{{}}},\n".format(ent['author'])
     entry += "  journal = {{{}}},\n".format(ent['journal'])
     entry += "  volume  = {{{}}},\n".format(ent['volume'])
-    entry += "  number  = {{{}}},\n".format(ent['number'])
+    # entry += "  number  = {{{}}},\n".format(ent['number'])
     entry += "  pages   = {{{}}},\n".format(ent['pages'])
     entry += "  year    = {{{}}},\n".format(ent['year'])
     entry += "}"
@@ -83,8 +83,8 @@ def get_book(ent):
     entry += "@{}{{{},\n".format(ent.typ, ent.key)
     entry += "  title     = {{{}}},\n".format(ent['title'])
     entry += "  author    = {{{}}},\n".format(ent['author'])
-    entry += "  publisher = {{{}}},\n".format(ent['note'])
-    entry += "  edition   = {{{}}},\n".format(ent['edition'])
+    entry += "  publisher = {{{}}},\n".format(ent['publisher'])
+    # entry += "  edition   = {{{}}},\n".format(ent['edition'])
     entry += "  year      = {{{}}},\n".format(ent['year'])
     entry += "}"
     return entry
@@ -97,7 +97,7 @@ def ent2bib(ent):
     elif ent.typ == 'article':
         s = get_journal(ent)
     elif ent.typ in ['preprint', 'unpublished']:
-        ent.typ = 'unpublished'
+        ent.typ = 'preprint'
         s = get_preprint(ent)
     elif ent.typ == 'book':
         s = get_book(ent)
