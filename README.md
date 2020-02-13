@@ -2,6 +2,11 @@
 
 The purpose of the repository is to present rules and tips on bib entries and citation format when writing a paper. In addition to that, this repository also contains a simple procedure to pre-process bib entries (missing entries checking, reformatting bib entry fields, and unifying bib entries' id), which makes [this guy's](https://cs.uwaterloo.ca/~y328yu/) life easier.
 
+I also start to attaching some writing tips.
+
+1. JMLR [writing instructions](http://www.jmlr.org/format/format.html)
+2. Jimmy's [tips](https://github.com/lintool/guide/blob/master/writing-pet-peeves.md)
+
 ## Usage
 Type `python transform.py test.bib` in the command line. The procedure will parse the bib file and output new bib entries in the command line. Redirect the output to a file if you want to (e.g. `python transform.py test.bib > new-test.bib`).
 
@@ -10,11 +15,11 @@ The procedure will crash on bib files with incorrect grammar or missing required
 ## Core Functionalities
 - [x] change 'url' field into a hyper link in title
 - [x] unify bib entries id (see blow) 
-- [x] delete redundant fields (e.g. keywords)
+- [x] delete redundant fields (e.g. keywords, abstract)
 
 ## Source of Bib Entries 
 
-Google scholar is always a default source when cannot find the official bib entry. However, when the official bib file is available, one should avoid using Google scholar. When possible, please cite a published version rather than an arXiv preprint version.
+Google scholar is always a default source when the official bib entry cannot be found. However, when the official bib file is available, one should avoid using google scholar. When possible, please cite a published version rather than an arXiv preprint version.
 
 We recommend downloading bib entries from official websites. Here is a non-exhaustive list of websites.
 
@@ -22,7 +27,7 @@ We recommend downloading bib entries from official websites. Here is a non-exhau
 2. For NIPS papers, see <https://papers.nips.cc>
 3. For ICLR papers, see <https://openreview.net>
 4. For Annals of Statistics paper, see <https://projecteuclid.org/>
-5. For CVPR and ICCV papers, see <http://openaccess.thecvf.com> 
+5. For CVPR and ICCV papers, see <http://openaccess.thecvf.com>
 
 ## General Citation Format
 
