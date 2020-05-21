@@ -485,68 +485,68 @@ def tex_to_unicode(string, pos=messages.Pos.unknown):
     return TeXToUnicode().process(string, pos)
 
 
-class TeXToAscii(TeXProcessor):
-    """A simple TeX-to-unicode converter.
+# class TeXToAscii(TeXProcessor):
+#     """A simple TeX-to-unicode converter.
 
-    This interprets accents and other special tokens like '--' and
-    eliminates braces.
-    """
+#     This interprets accents and other special tokens like '--' and
+#     eliminates braces.
+#     """
 
-    # Simple TeX-to-Unicode replacements
-    _SIMPLE = {
-        # Active characters
-        '~': '\u00A0',
-        # chardefs from plain.tex
-        '\\%': '%', '\\&': '&', '\\#': '#', '\\$': '$', '\\ss': 'ß',
-        '\\ae': 'ae', '\\oe': 'oe', '\\o': 'o',
-        '\\AE': 'AE', '\\OE': 'OE', '\\O': 'O',
-        '\\i': 'i', '\\j': 'j',
-        '\\aa': 'å', '\\AA': 'Å', '\\l': 'ł', '\\L': 'Ł',
-        # Other defs from plain.tex
-        '\\_': '_', '\\dag': '†', '\\ddag': '‡', '\\S': '§', '\\P': '¶',
-    }
+#     # Simple TeX-to-Unicode replacements
+#     _SIMPLE = {
+#         # Active characters
+#         '~': '\u00A0',
+#         # chardefs from plain.tex
+#         '\\%': '%', '\\&': '&', '\\#': '#', '\\$': '$', '\\ss': 'ß',
+#         '\\ae': 'ae', '\\oe': 'oe', '\\o': 'o',
+#         '\\AE': 'AE', '\\OE': 'OE', '\\O': 'O',
+#         '\\i': 'i', '\\j': 'j',
+#         '\\aa': 'å', '\\AA': 'Å', '\\l': 'ł', '\\L': 'Ł',
+#         # Other defs from plain.tex
+#         '\\_': '_', '\\dag': '†', '\\ddag': '‡', '\\S': '§', '\\P': '¶',
+#     }
 
-    # TeX accent control sequences to Unicode combining characters
-    _ACCENTS = {
-        # Accents defined in plain.tex
-        '\\`': '\u0300', "\\'": '\u0301', '\\v': '\u030C', '\\u': '\u0306',
-        '\\=': '\u0304', '\\^': '\u0302', '\\.': '\u0307', '\\H': '\u030B',
-        '\\~': '\u0303', '\\"': '\u0308',
-        '\\d': '\u0323', '\\b': '\u0331', '\\c': '\u0327',
-        # Other accents that seem to be standard, but I can't find
-        # their definitions
-        '\\r': '\u030A', '\\k': '\u0328'
-    }
+#     # TeX accent control sequences to Unicode combining characters
+#     _ACCENTS = {
+#         # Accents defined in plain.tex
+#         '\\`': '\u0300', "\\'": '\u0301', '\\v': '\u030C', '\\u': '\u0306',
+#         '\\=': '\u0304', '\\^': '\u0302', '\\.': '\u0307', '\\H': '\u030B',
+#         '\\~': '\u0303', '\\"': '\u0308',
+#         '\\d': '\u0323', '\\b': '\u0331', '\\c': '\u0327',
+#         # Other accents that seem to be standard, but I can't find
+#         # their definitions
+#         '\\r': '\u030A', '\\k': '\u0328'
+#     }
 
-    def process(self, string, pos):
-        string = super().process(string, pos)
+#     def process(self, string, pos):
+#         string = super().process(string, pos)
 
-        # Handle ligatures that are unique to TeX.  This must be done
-        # after macro expansion, but before brace removal because
-        # braces inhibit ligatures.
-        string = string.replace('---', '\u2014').replace('--', '\u2013')
+#         # Handle ligatures that are unique to TeX.  This must be done
+#         # after macro expansion, but before brace removal because
+#         # braces inhibit ligatures.
+#         string = string.replace('---', '\u2014').replace('--', '\u2013')
 
-        # Remove braces
-        return string.replace('{', '').replace('}', '')
+#         # Remove braces
+#         return string.replace('{', '').replace('}', '')
 
-    def _expand(self, cs):
-        if cs in self._SIMPLE:
-            return self._SIMPLE[cs]
-        if cs in self._ACCENTS:
-            return ""
-        return None
+#     def _expand(self, cs):
+#         if cs in self._SIMPLE:
+#             return self._SIMPLE[cs]
+#         if cs in self._ACCENTS:
+#             return ""
+#         return None
 
-def tex_to_ascii(string, pos=messages.Pos.unknown):
-    """Convert a BibTeX field value written in TeX to Unicode.
+# def tex_to_ascii(string, pos=messages.Pos.unknown):
+#     """Convert a BibTeX field value written in TeX to Unicode.
 
-    This interprets accents and other special tokens like '--' and
-    eliminates braces.  Raises InputError if it encounters a macro it
-    doesn't understand.
+#     This interprets accents and other special tokens like '--' and
+#     eliminates braces.  Raises InputError if it encounters a macro it
+#     doesn't understand.
 
-    Note that BibTeX's internal understanding of accented characters
-    (e.g., purify$ and change.case$) is much more limited than TeX's.
-    This implements something closer to TeX on the assumption that the
-    goal is to display the string.
-    """
+#     Note that BibTeX's internal understanding of accented characters
+#     (e.g., purify$ and change.case$) is much more limited than TeX's.
+#     This implements something closer to TeX on the assumption that the
+#     goal is to display the string.
+#     """
 
-    return TeXToAscii().process(string, pos)
+#     return TeXToAscii().process(string, pos)

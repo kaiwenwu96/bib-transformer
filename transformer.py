@@ -1,15 +1,19 @@
 import sys
 sys.path.append('biblib')
 
+import unicodedata
+
 import biblib.bib
 import biblib.messages
 import biblib.algo
+
 import argparse
 
 
 def get_id(ent):
-    # authors = [biblib.algo.tex_to_unicode(author.pretty(), pos=ent.field_pos['author']) for author in ent.authors()]
-    authors = [biblib.algo.tex_to_ascii(author.pretty(), pos=ent.field_pos['author']) for author in ent.authors()]
+    authors = [biblib.algo.tex_to_unicode(author.pretty(), pos=ent.field_pos['author']) for author in ent.authors()]
+    # authors = [biblib.algo.tex_to_ascii(author.pretty(), pos=ent.field_pos['author']) for author in ent.authors()]
+    authors = [unicodedata.normalize('NFKD', author).encode('ascii', 'ignore').decode("utf-8") for author in authors]
 
     ret = ""
 
@@ -23,7 +27,7 @@ def get_id(ent):
     else:
         raise Exception()
 
-    ret += ent['year']
+    ret += str(int(ent['year']) % 100)
 
     return ret
 
@@ -164,15 +168,16 @@ if __name__ == "__main__":
                 new_id_lst.append(ent.key)
             else:
                 for ch in [chr(i) for i in range(ord('a'), ord('z') + 1)]:
-                    ent.key += ch
-                    if ent.key not in new_id_lst:
+                    # ent.key += ch
+                    if ent.key + ch not in new_id_lst:
+                        ent.key += ch
                         break
-                    ent.key = ent.key[:-1]
+                    # ent.key = ent.key[:-1]
                 new_id_lst.append(ent.key)
 
         for ent in ent_lst:
             ent = insert_url(ent)
-            ent = change_id(ent)
+            # ent = change_id(ent)
 
             if args.o == "bib":
                 s = ent2bib(ent)
