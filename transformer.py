@@ -168,16 +168,13 @@ if __name__ == "__main__":
                 new_id_lst.append(ent.key)
             else:
                 for ch in [chr(i) for i in range(ord('a'), ord('z') + 1)]:
-                    # ent.key += ch
                     if ent.key + ch not in new_id_lst:
                         ent.key += ch
                         break
-                    # ent.key = ent.key[:-1]
                 new_id_lst.append(ent.key)
 
         for ent in ent_lst:
             ent = insert_url(ent)
-            # ent = change_id(ent)
 
             if args.o == "bib":
                 s = ent2bib(ent)
