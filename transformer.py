@@ -101,7 +101,7 @@ def ent2bib(ent):
     elif ent.typ == 'article':
         s = get_journal(ent)
     elif ent.typ in ['preprint', 'unpublished']:
-        ent.typ = 'preprint'
+        ent.typ = 'unpublished'
         s = get_preprint(ent)
     elif ent.typ == 'book':
         s = get_book(ent)
