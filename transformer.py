@@ -1,6 +1,7 @@
 import sys
 sys.path.append('biblib')
 
+import time
 import unicodedata
 
 import biblib.bib
@@ -27,7 +28,7 @@ def get_id(ent):
     else:
         raise Exception()
 
-    ret += str(int(ent['year']) % 100)
+    ret += "{:02d}".format(int(ent['year']) % 100)
 
     return ret
 
@@ -94,6 +95,17 @@ def get_book(ent):
     return entry
 
 
+def get_misc(ent):
+    entry = ""
+    entry += ""
+    entry += "@{}{{{},\n".format(ent.typ, ent.key)
+    entry += "  title     = {{{}}},\n".format(ent['title'])
+    entry += "  author    = {{{}}},\n".format(ent['author'])
+    entry += "  year      = {{{}}},\n".format(ent['year'])
+    entry += "}"
+    return entry
+
+
 def ent2bib(ent):
     if ent.typ in ['inproceedings', 'incollection', 'InProceedings']:
         ent.typ = 'inproceedings'
@@ -105,7 +117,11 @@ def ent2bib(ent):
         s = get_preprint(ent)
     elif ent.typ == 'book':
         s = get_book(ent)
+    elif ent.typ == 'misc':
+        s = get_misc(ent)
     else:
+        # print("unrecognized bib entry..")
+        # print(ent)
         raise Exception("Unknown bib entry type")
 
     return s
@@ -133,59 +149,74 @@ def ent2latex(ent):
 
 
 def ent2html(ent):
-    pass
+    assert 0
+
+
+def transform(in_file, out_file, option):
+    bib = open(in_file, "r")
+
+    # Load databases
+    db = biblib.bib.Parser().parse(bib, log_fp=sys.stderr).get_entries()
+
+    # Resolve cross-references
+    db = biblib.bib.resolve_crossrefs(db)
+
+    # Print entries
+    recoverer = biblib.messages.InputErrorRecoverer()
+
+    ent_lst = [ent for ent in db.values()]
+
+    for ent in ent_lst:
+        ent = change_id(ent)
+
+    id_lst = [xx.key for xx in ent_lst]
+    new_id_lst = []
+
+    for ent in ent_lst:
+        if len([xx for xx in id_lst if xx == ent.key]) == 1:
+            new_id_lst.append(ent.key)
+        else:
+            for ch in [chr(i) for i in range(ord('a'), ord('z') + 1)]:
+                if ent.key + ch not in new_id_lst:
+                    ent.key += ch
+                    break
+            new_id_lst.append(ent.key)
+
+    for ent in ent_lst:
+        ent = insert_url(ent)
+
+        if option == "bib":
+            s = ent2bib(ent)
+        elif option == "latex":
+            s = ent2latex(ent)
+        elif option == "html":
+            s = ent2html(ent)
+
+        print("{}\n".format(s))
+
+    recoverer.reraise()
 
 
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument('file', help='.bib file to process', type=str)
-    arg_parser.add_argument('-o', help='options', type=str, default="bib")
+    arg_parser.add_argument('--in_file', type=str, help='.bib file to process')
+    arg_parser.add_argument('--out_file', type=str, default=None, help='file to dump results')
+    arg_parser.add_argument('--option', type=str, default="bib", help='bib | latex | html')
+    arg_parser.add_argument('--loop', type=int, default=0, help='whether to recursively run the procedure')
 
     args = arg_parser.parse_args()
 
+    if args.out_file is not None:
+        sys.stdout = open(args.out_file, 'w')
+
     try:
-        bib = open(args.file, "r")
+        while True:
+            transform(args.in_file, args.out_file, args.option)
 
-        # Load databases
-        db = biblib.bib.Parser().parse(bib, log_fp=sys.stderr).get_entries()
+            if not args.loop:
+                break
 
-        # Resolve cross-references
-        db = biblib.bib.resolve_crossrefs(db)
-
-        # Print entries
-        recoverer = biblib.messages.InputErrorRecoverer()
-
-        ent_lst = [ent for ent in db.values()]
-
-        for ent in ent_lst:
-            ent = change_id(ent)
-
-        id_lst = [xx.key for xx in ent_lst]
-        new_id_lst = []
-
-        for ent in ent_lst:
-            if len([xx for xx in id_lst if xx == ent.key]) == 1:
-                new_id_lst.append(ent.key)
-            else:
-                for ch in [chr(i) for i in range(ord('a'), ord('z') + 1)]:
-                    if ent.key + ch not in new_id_lst:
-                        ent.key += ch
-                        break
-                new_id_lst.append(ent.key)
-
-        for ent in ent_lst:
-            ent = insert_url(ent)
-
-            if args.o == "bib":
-                s = ent2bib(ent)
-            elif args.o == "latex":
-                s = ent2latex(ent)
-            elif args.o == "html":
-                s = ent2html(ent)
-
-            print("{}\n".format(s))
-
-        recoverer.reraise()
+            time.sleep(30)
 
     except biblib.messages.InputError:
         sys.exit(1)
