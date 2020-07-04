@@ -2,13 +2,13 @@
 
 The purpose of the repository is to present rules and tips on bib entries and citation format when writing a paper. In addition to that, this repository also contains a simple procedure to pre-process bib entries (missing entries checking, reformatting bib entry fields, and unifying bib entries' id), which makes [this guy's](https://cs.uwaterloo.ca/~y328yu/) life easier.
 
-I also start to attaching some writing tips.
+I also attach some writing tips.
 
 1. JMLR [writing instructions](http://www.jmlr.org/format/format.html)
 2. Jimmy's [tips](https://github.com/lintool/guide/blob/master/writing-pet-peeves.md)
 
 ## Usage
-Type `python transform.py test.bib` in the command line. The procedure will parse the bib file and output new bib entries in the command line. Redirect the output to a file if you want to (e.g. `python transform.py test.bib > new-test.bib`).
+Type `python transform.py --in_file input_file.bib --out_file output_file.bib --option bib  --loop 1` in the command line. The procedure will parse the bib file and output new bib entries to the output file.
 
 The procedure will crash on bib files with incorrect grammar or missing required fields (e.g. author, title).
 
