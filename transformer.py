@@ -65,7 +65,6 @@ def get_journal(ent):
     entry += "  author  = {{{}}},\n".format(ent['author'])
     entry += "  journal = {{{}}},\n".format(ent['journal'])
     entry += "  volume  = {{{}}},\n".format(ent['volume'])
-    # entry += "  number  = {{{}}},\n".format(ent['number'])
     entry += "  pages   = {{{}}},\n".format(ent['pages'])
     entry += "  year    = {{{}}},\n".format(ent['year'])
     entry += "}"
@@ -120,8 +119,6 @@ def ent2bib(ent):
     elif ent.typ == 'misc':
         s = get_misc(ent)
     else:
-        # print("unrecognized bib entry..")
-        # print(ent)
         raise Exception("Unknown bib entry type")
 
     return s
@@ -182,6 +179,14 @@ def transform(in_file, out_file, option):
                     break
             new_id_lst.append(ent.key)
 
+    def key_func(ent):
+        authors = [biblib.algo.tex_to_unicode(author.pretty(), pos=ent.field_pos['author']) for author in ent.authors()]
+        authors = [unicodedata.normalize('NFKD', author).encode('ascii', 'ignore').decode("utf-8") for author in authors]
+
+        return str.lower(authors[0].split(' ')[-1])
+
+    ent_lst.sort(key=key_func)
+
     for ent in ent_lst:
         ent = insert_url(ent)
 
@@ -196,27 +201,31 @@ def transform(in_file, out_file, option):
 
     recoverer.reraise()
 
-
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument('--in_file', type=str, default=None, help='.bib file to process')
-    arg_parser.add_argument('--out_file', type=str, default=None, help='File to dump results')
+    arg_parser.add_argument('--out_file', type=str, default=None, help='str or None. File to dump results. None indicates standard output.')
     arg_parser.add_argument('--option', type=str, default="bib", help='bib | latex | html')
     arg_parser.add_argument('--loop', type=int, default=0, help='Whether to recursively run the procedure. Default: 0')
 
     args = arg_parser.parse_args()
 
-    if args.out_file is not None:
-        sys.stdout = open(args.out_file, 'w')
 
     try:
         while True:
+            if args.out_file is not None:
+                sys.stdout = open(args.out_file, 'w')
+
             transform(args.in_file, args.out_file, args.option)
+
+            if args.out_file is not None:
+                sys.stdout.close()
 
             if not args.loop:
                 break
 
             time.sleep(30)
+
 
     except biblib.messages.InputError:
         sys.exit(1)
