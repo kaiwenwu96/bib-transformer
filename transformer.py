@@ -199,10 +199,10 @@ def transform(in_file, out_file, option):
 
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument('--in_file', type=str, help='.bib file to process')
-    arg_parser.add_argument('--out_file', type=str, default=None, help='file to dump results')
+    arg_parser.add_argument('--in_file', type=str, default=None, help='.bib file to process')
+    arg_parser.add_argument('--out_file', type=str, default=None, help='File to dump results')
     arg_parser.add_argument('--option', type=str, default="bib", help='bib | latex | html')
-    arg_parser.add_argument('--loop', type=int, default=0, help='whether to recursively run the procedure')
+    arg_parser.add_argument('--loop', type=int, default=0, help='Whether to recursively run the procedure. Default: 0')
 
     args = arg_parser.parse_args()
 
